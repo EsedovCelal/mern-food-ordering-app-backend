@@ -83,7 +83,17 @@ const searchRestaurant = async (req: Request, res: Response) => {
   }
 };
 
+const getCities = async (req: Request, res: Response) => {
+  try {
+    const cities = await Restaurant.distinct("city");
+    res.json(cities);
+  } catch (error) {
+    res.status(500).json({ message: "Failed to fetch cities" });
+  }
+};
+
 export default {
+  getCities,
   searchRestaurant,
   getRestaurant,
 };
